@@ -1,0 +1,14 @@
+Create info.lst		(must create info_[num] folder)
+-----------------
+opencv_createsamples -img test_photo.resized.jpg -bg bg.txt -info info_[num]/info.lst -pngoutput info_[num] -maxxangle 0.5 -maxyangle -0.5 -maxzangle 0.5 -num 1570
+				Will also generate photos in info_[num]
+				Example: 1559_0012_0005_0050_0050.jpg
+
+Create Vector Files
+--------------------
+opencv_createsamples -info info_[num]/info.lst -num 1570 -w 20 -h 20 -vec positives_[num].vec
+
+Train Classifier	(must create data_[num] folder) 
+-----------------
+opencv_traincascade -data data_[num] -vec positives_[num].vec -bg bg.txt -numPos 1125 -numNeg 375 -numStages 10 -w 20 -h 20
+
